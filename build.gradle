@@ -40,3 +40,10 @@ task stage {
     dependsOn build
 }
 
+gradle.taskGraph.whenReady {
+  taskGraph ->
+    if (taskGraph.hasTask(stage)) {
+      test.enabled = false
+    }
+}
+
