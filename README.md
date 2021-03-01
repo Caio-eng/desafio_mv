@@ -1,59 +1,25 @@
-# desafio_unidac project
+Desafio Unidac - Grupo WL
+Realizamos café da manhã constantemente e sempre há conflito no merge kkkk
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+Sempre há pessoas que querem trazer pão, bolo, suco...
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+Nesse desafio é necessário que seja montando uma aplicação web (front a sua escolha) com backend em JAVA (REST).
 
-## Running the application in dev mode
+A aplicação deverá ter o nome do colaborador, cpf e o que será trazido para o café da manha. O colaborador poderá trazer mais de um opção para o café da manhã.
 
-You can run your application in dev mode that enables live coding using:
-```shell script
-./gradlew quarkusDev
-```
+Ex. Fulano de Tal, CPF: 732.442.160-13 e Suco de Acerola.
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+Utilizar NativeQuery para inserção, atualização, consulta e exclusão.
+Não poderá repetir cpf.
+Não poderá repetir opção de café da manhã mesmo que seja outro colaborador.
+Implemente utilizando a linguagem Java com a IDE eclipse.
 
-## Packaging and running the application
+Layout
+Utilize a criatividade e monte um layout amigavel.
 
-The application can be packaged using:
-```shell script
-./gradlew build
-```
-It produces the `quarkus-run.jar` file in the `build/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `build/quarkus-app/lib/` directory.
+Telas Obrigatórias
+Crud de Cadastro
+Lista de participantes com suas opções
 
-If you want to build an _über-jar_, execute the following command:
-```shell script
-./gradlew build -Dquarkus.package.type=uber-jar
-```
-
-The application is now runnable using `java -jar build/quarkus-app/quarkus-run.jar`.
-
-## Creating a native executable
-
-You can create a native executable using: 
-```shell script
-./gradlew build -Dquarkus.package.type=native
-```
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
-```shell script
-./gradlew build -Dquarkus.package.type=native -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./build/desafio_unidac-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/gradle-tooling.
-
-## Related guides
-
-- Hibernate ORM ([guide](https://quarkus.io/guides/hibernate-orm)): Define your persistent model with Hibernate ORM and JPA
-- RESTEasy JSON-B ([guide](https://quarkus.io/guides/rest-json)): JSON-B serialization support for RESTEasy
-
-## Provided examples
-
-### RESTEasy JAX-RS example
-
-REST is easy peasy with this Hello World RESTEasy resource.
-
-[Related guide section...](https://quarkus.io/guides/getting-started#the-jax-rs-resources)
+Envio do Desafio
+Deverá ser hospedado no heroku ou outro servidor de aplicação e disponibilizado o link da aplicação + o link no github. Lembrando que este teste não é eliminatório serve apenas para avaliar seu nível de conhecimento :)
