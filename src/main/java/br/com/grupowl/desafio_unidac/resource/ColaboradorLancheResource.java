@@ -15,9 +15,12 @@ import br.com.grupowl.desafio_unidac.service.ColaboradorService;
 import br.com.grupowl.desafio_unidac.service.LancheService;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
+import javax.persistence.MapsId;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -53,7 +56,9 @@ public class ColaboradorLancheResource {
 			return Response.status(Status.CREATED).entity(criado).build();
 		} catch (Exception e) {
 			e.printStackTrace();
-			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+			Map<String, String> resp = new HashMap<String, String>();
+			resp.put("erro", e.getMessage());
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(resp).build();
 		}
 	
 		

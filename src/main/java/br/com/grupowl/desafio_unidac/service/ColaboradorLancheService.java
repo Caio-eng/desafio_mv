@@ -28,6 +28,11 @@ public class ColaboradorLancheService {
 	@Inject
 	LancheService lancheService;
 
+	public boolean existeLanche(Long idLanche) {
+		return ((BigInteger) em.createNativeQuery("SELECT count(*) FROM colaboradorlanche WHERE lancheid = ?1")
+				.setParameter(1, idLanche).getSingleResult()).intValue() > 0;
+	}
+
 	@Transactional
 	public ColaboradorLanche criar(ColaboradorLanche colaboradorLanche) throws Exception {
 
@@ -40,6 +45,12 @@ public class ColaboradorLancheService {
 
 		if (lanche == null || colaborador == null) {
 			throw new Exception("Deve informar o colaborador ou um lanche");
+		}
+
+		if (existeLanche(lanche.getId())) {
+			throw new Exception(
+					String.format("Já existe um café da manhã com o lanche %s\nPor Favor escolha outra opção de lanche",
+							lanche.getNome()));
 		}
 
 		if (colaboradorLanche.getId() != null) {
@@ -58,13 +69,12 @@ public class ColaboradorLancheService {
 
 		List<ColaboradorLanche> colaboradoresLanches = new ArrayList();
 		List<PedidoLanche> pedidoLanches = new ArrayList();
-		List<Object[]> result =			em.createNativeQuery("SELECT * FROM colaboradorlanche")
-				.getResultList();
+		List<Object[]> result = em.createNativeQuery("SELECT * FROM colaboradorlanche").getResultList();
 		for (Object[] linha : result) {
 			ColaboradorLanche colaboradorLanche = new ColaboradorLanche();
-			colaboradorLanche.setId(((BigInteger)linha[0]).longValue());
-			colaboradorLanche.setColaboradorId(((BigInteger)linha[1]).longValue());
-			colaboradorLanche.setLancheId(((BigInteger)linha[2]).longValue());
+			colaboradorLanche.setId(((BigInteger) linha[0]).longValue());
+			colaboradorLanche.setColaboradorId(((BigInteger) linha[1]).longValue());
+			colaboradorLanche.setLancheId(((BigInteger) linha[2]).longValue());
 			colaboradoresLanches.add(colaboradorLanche);
 		}
 		if (colaboradoresLanches.isEmpty()) {
@@ -77,7 +87,7 @@ public class ColaboradorLancheService {
 			colaborador = colaboradorService.buscar(cl.getColaboradorId());
 
 			lanche = lancheService.buscar(cl.getLancheId());
-			
+
 			PedidoLanche pd = new PedidoLanche(cl.getId(), colaborador, lanche);
 			pedidoLanches.add(pd);
 		}
@@ -128,7 +138,7 @@ public class ColaboradorLancheService {
 //					colaboradorLancheAtual.getId(), colaboradorLancheAtual.getColaboradorId(),
 //					colaboradorLancheAtual.getLancheId()));
 //		} else {
-//			System.out.println("N�o existe colaborador com id = " + id);
+//			System.out.println("N�o existe colaborador com id = " + id);
 //		}
 //
 //		return colaboradorLancheAtual;
