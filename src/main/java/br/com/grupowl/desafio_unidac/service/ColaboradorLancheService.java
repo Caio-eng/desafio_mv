@@ -32,6 +32,11 @@ public class ColaboradorLancheService {
 		return ((BigInteger) em.createNativeQuery("SELECT count(*) FROM colaboradorlanche WHERE lancheid = ?1")
 				.setParameter(1, idLanche).getSingleResult()).intValue() > 0;
 	}
+	
+	public boolean existeColaborador(Long idColaborador) {
+		return ((BigInteger) em.createNativeQuery("SELECT count(*) FROM colaboradorlanche WHERE colaboradorid = ?1")
+				.setParameter(1, idColaborador).getSingleResult()).intValue() > 0;
+	}
 
 	@Transactional
 	public ColaboradorLanche criar(ColaboradorLanche colaboradorLanche) throws Exception {
@@ -47,6 +52,12 @@ public class ColaboradorLancheService {
 			throw new Exception("Deve informar o colaborador ou um lanche");
 		}
 
+		if (existeColaborador(colaborador.getId())) {
+			throw new Exception(
+					String.format("Já existe um lanche para este colaborador %s\nPor favor selecione outro colaborador",
+							colaborador.getNome()));
+		}
+		
 		if (existeLanche(lanche.getId())) {
 			throw new Exception(
 					String.format("Já existe um café da manhã com o lanche %s\nPor Favor escolha outra opção de lanche",
