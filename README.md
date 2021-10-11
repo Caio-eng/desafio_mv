@@ -1,4 +1,4 @@
-# Desafio Unidac - Grupo WL
+# Desafio MV
 
 ### link da aplicação no heroku: https://desafio-unidac.herokuapp.com/#/
 
